@@ -13,4 +13,7 @@ public interface ApplicationDAO extends JpaRepository<AssistantApplication,Integ
 
     List<AssistantApplication> findByStoreId(int store_id);
 
+    AssistantApplication findByUserId(String user_id);
+
+    AssistantApplication findById(int id);
 }

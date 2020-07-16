@@ -9,4 +9,6 @@ public interface ShoppingCartDAO extends JpaRepository<ShoppingCart, Integer> {
 
     List<ShoppingCart> findByUserId(String user_id);
 
+    void deleteById(String id);
+
 }

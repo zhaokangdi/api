@@ -6,22 +6,22 @@ package com.bookshop.bookshop.entity;
 public class BookInfo {
 
     private Book book;
-    private String store;
+    private String storeName;
 
     public Book getBook() {
         return book;
     }
 
-    public String getStore() {
-        return store;
+    public String getStoreName() {
+        return storeName;
     }
 
     public void setBook(Book book) {
         this.book = book;
     }
 
-    public void setStore(String store) {
-        this.store = store;
+    public void setStoreName(String storeName) {
+        this.storeName = storeName;
     }
 
 }

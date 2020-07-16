@@ -18,6 +18,7 @@ public interface StoreDAO extends JpaRepository<Store, Integer>{
                                                                          String addressCondition,
                                                                          String introductionCondition);
 
+    void deleteById(String storeId);
 
 
 }

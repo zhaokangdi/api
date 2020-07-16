@@ -5,7 +5,7 @@
     <version>0.0.1-SNAPSHOT</version>
     <name>wj</name>
     <description>White Jotter - Your Mind Palace</description>
-    <packaging>war</packaging>
+    <packaging>jar</packaging>
     <parent>
         <groupId>org.springframework.boot</groupId>
         <artifactId>spring-boot-starter-parent</artifactId>
@@ -18,12 +18,6 @@
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-web</artifactId>
-        </dependency>
-        <!-- springboot tomcat 支持 -->
-        <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-tomcat</artifactId>
-            <scope>provided</scope>
         </dependency>
         <!-- 热部署 -->
         <dependency>
@@ -117,6 +111,12 @@
             <artifactId>lombok</artifactId>
             <version>1.18.4</version>
         </dependency>
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-tx</artifactId>
+            <version>5.1.3.RELEASE</version>
+        </dependency>
+
     </dependencies>
 
     <repositories>
@@ -143,6 +143,11 @@
             <plugin>
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-maven-plugin</artifactId>
+
+                <configuration>
+                    <mainClass>com.bookshop.bookshop.BookshopApplication</mainClass>
+                </configuration>
+
             </plugin>
         </plugins>
     </build>

@@ -15,7 +15,7 @@ public class Book {
     int id;
 
     @Column(name = "store_id")
-    String storeId;
+    int storeId;
 
     @Column(name = "name")
     String name;
@@ -38,14 +38,18 @@ public class Book {
     @Column(name = "introduction")
     String introduction;
 
+    @Column(name = "pic_path")
+    String picPath;
+
     @Column(name = "score")
     String score;
+
 
     public int getId() {
         return id;
     }
 
-    public String getStoreId() {
+    public int getStoreId() {
         return storeId;
     }
 
@@ -77,14 +81,16 @@ public class Book {
         return introduction;
     }
 
+    public String getPicPath() { return picPath; }
+
     public String getScore() { return score; }
 
     public void setId(int id) {
         this.id = id;
     }
 
-    public void setStoreId(String store_id) {
-        this.storeId = storeId;
+    public void setStoreId(int store_id) {
+        this.storeId = store_id;
     }
 
     public void setName(String name) {
@@ -115,6 +121,10 @@ public class Book {
         this.introduction = introduction;
     }
 
+    public void setPicPath(String picPath) { this.picPath = picPath; }
+
     public void setScore(String score) { this.score = score; }
 
+    public void setId(Integer integer) {
+    }
 }

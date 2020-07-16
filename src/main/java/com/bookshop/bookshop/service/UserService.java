@@ -1,8 +1,10 @@
 package com.bookshop.bookshop.service;
 
+import com.bookshop.bookshop.dao.BusinessDAO;
 import com.bookshop.bookshop.dao.UserDAO;
+import com.bookshop.bookshop.entity.Business;
+import com.bookshop.bookshop.entity.LoginEntity;
 import com.bookshop.bookshop.entity.User;
-import com.bookshop.bookshop.result.ResultFactory;
 import org.apache.shiro.authc.UsernamePasswordToken;
 import org.apache.shiro.subject.Subject;
 import org.apache.shiro.SecurityUtils;
@@ -10,15 +12,20 @@ import org.apache.shiro.crypto.SecureRandomNumberGenerator;
 import org.apache.shiro.crypto.hash.SimpleHash;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
 
 @Service
+@Transactional
 public class UserService {
 
     @Autowired
     UserDAO userDAO;
+
+    @Autowired
+    BusinessDAO businessDAO;
 
     public User getUserById(String id){
         return userDAO.findById(id);
@@ -53,7 +60,7 @@ public class UserService {
         user.setUsername(username);
         //user.setPassword(password);
         user.setAddress(address);
-        user.setRole(role);
+        user.setRole("普通用户");
 
         if(!idSate(id))
             tag = 0;
@@ -80,16 +87,27 @@ public class UserService {
     }
 
     //登录时根据id和password返回user实体
-    public User getUser(String id, String password){
+    public User login(String id, String password){
 
-        Subject subject = SecurityUtils.getSubject();
-        UsernamePasswordToken usernamePasswordToken = new UsernamePasswordToken(id,password);
+        User user = userDAO.findById(id);
+        if(user == null){
+            return null;
+        }
+        else{
+            //数据库中的密码
+            String passwordM = user.getPassword();
+            //获取盐
+            String salt = user.getSalt();
 
-        try {
-            subject.login(usernamePasswordToken);
-            return userDAO.findById(id);
-        } catch (Exception e) {
-           return null;
+            int times = 2;
+            // 得到 hash 后的密码
+            String encodedPassword = new SimpleHash("md5", password, salt, times).toString();
+            if(passwordM.equals(encodedPassword)){
+                return user;
+            }
+            else{
+                return null;
+            }
         }
     }
 
@@ -120,6 +138,7 @@ public class UserService {
         return (User) userDAO.save(userOld);
     }
 
+
     //添加助理
     public User addAssistant(String id) {
 
@@ -128,5 +147,54 @@ public class UserService {
         return (User) userDAO.save(userOld);
     }
 
+    //注销用户
+    public void deleteUser(String id) {
+        userDAO.deleteById(id);
+    }
+
+    public String indentification(String phone){
+
+        Business business =  businessDAO.findByPhone(phone);
+        if(business!=null){//是商家
+            return "商家";
+        }
+        else{//用户
+            User user = userDAO.findById(phone);
+            if((user.getRole()).equals("助理")){ //已是助理
+                return "助理";
+            }
+            else{
+                return "普通用户";
+            }
+        }
+
+    }
+
+    public LoginEntity userSettingInfo(String id){
+
+        LoginEntity entity = new LoginEntity();
+        entity.setId(id);
+
+        String i = this.indentification(id);
+        if(i.equals("商家")){
+            entity.setRole("商家");
+            Business business = businessDAO.findByPhone(id);
+            entity.setName(business.getName());
+            entity.setAddress(business.getAddress());
+        }
+
+        else{
+            if(i.equals("普通用户")){
+                entity.setRole("普通用户");
+            }
+            else{
+                entity.setRole("助理");
+            }
+            User user = userDAO.findById(id);
+            entity.setName(user.getUsername());
+            entity.setAddress(user.getAddress());
+        }
+        return entity;
+    }
 }
 

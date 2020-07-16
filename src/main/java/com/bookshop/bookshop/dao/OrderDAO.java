@@ -7,10 +7,15 @@ import java.util.List;
 
 public interface OrderDAO extends JpaRepository<Order, Integer> {
 
-    Order findById(String userId);
+    Order findById(int Id);
 
     List<Order> findByUserId(String userId);
 
-    List<Order> findByUserIdAndAndState(String userId,String state);
+    List<Order> findByBookId(int bookId);
+
+    List<Order> findByUserIdAndState(String userId,String state);
+
+    List<Order> findByBookIdAndState(int bookId,String state);
+
 
 }

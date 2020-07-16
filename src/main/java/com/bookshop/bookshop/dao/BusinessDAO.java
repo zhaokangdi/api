@@ -13,4 +13,7 @@ public interface BusinessDAO extends JpaRepository<Business,Integer> {
 
     List<Business> findByState(String state);
 
+    void deleteByPhone(String phone);
+
+    Business findByStoreId(int store_id);
 }

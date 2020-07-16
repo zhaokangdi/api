@@ -16,7 +16,7 @@ public class Order {
     int id;
 
     @Column(name = "book_id")
-    String bookId;
+    int bookId;
 
     @Column(name = "user_id")
     String userId;
@@ -37,7 +37,7 @@ public class Order {
         return id;
     }
 
-    public String getBookId() {
+    public int getBookId() {
         return bookId;
     }
 
@@ -65,7 +65,7 @@ public class Order {
         this.id = id;
     }
 
-    public void setBookId(String bookId) {
+    public void setBookId(int bookId) {
         this.bookId = bookId;
     }
 

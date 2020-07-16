@@ -8,10 +8,10 @@ import java.util.List;
 public interface BookDAO extends JpaRepository<Book, Integer> {
 
     //店铺中的全部图书
-    List<Book> findByStoreId(String storeId);
+    List<Book> findByStoreId(int storeId);
 
     //按评分降序
-    List<Book> findByStoreIdOrderByStoreIdDesc(String storeId);
+    List<Book> findByStoreIdOrderByStoreIdDesc(int storeId);
 
     //某一类别的全部图书
     List<Book> findByCategory(String category);
@@ -30,5 +30,10 @@ public interface BookDAO extends JpaRepository<Book, Integer> {
             String introductionCondition);
 
     Book findById(int id);
+
+    void deleteById(int id);
+
+    List<Book> findByCategoryOrderByScoreDesc(String category);
+
 
 }

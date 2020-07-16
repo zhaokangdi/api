@@ -19,7 +19,7 @@ public class ShoppingCart{
     String userId;
 
     @Column(name = "store_id")
-    String storeId;
+    int storeId;
 
     @Column(name = "book_name")
     String bookName;
@@ -33,6 +33,9 @@ public class ShoppingCart{
     @Column(name = "total_price")
     String totalPrice;
 
+    @Column(name = "book_id")
+    int bookId;
+
     public int getId() {
         return id;
     }
@@ -41,7 +44,7 @@ public class ShoppingCart{
         return userId;
     }
 
-    public String getStoreId() {
+    public int getStoreId() {
         return storeId;
     }
 
@@ -61,6 +64,8 @@ public class ShoppingCart{
         return totalPrice;
     }
 
+    public int getBookId() { return bookId; }
+
     public void setId(int id) {
         this.id = id;
     }
@@ -69,7 +74,7 @@ public class ShoppingCart{
         this.userId = userId;
     }
 
-    public void setStoreId(String storeId) {
+    public void setStoreId(int storeId) {
         this.storeId = storeId;
     }
 
@@ -89,4 +94,5 @@ public class ShoppingCart{
         this.totalPrice = totalPrice;
     }
 
+    public void setBookId(int bookId){ this.bookId = bookId; }
 }

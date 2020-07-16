@@ -14,7 +14,7 @@ public class Business {
     String phone;
 
     @Column(name = "store_id")
-    String id;
+    int storeId;
 
     @Column(name = "name")
     String name;
@@ -34,8 +34,8 @@ public class Business {
     @Column(name = "introduction")
     String introduction;
 
-    public String getId() {
-        return id;
+    public int getStoreId() {
+        return storeId;
     }
 
     public String getName() {
@@ -64,8 +64,8 @@ public class Business {
         return introduction;
     }
 
-    public void setId(String id) {
-        this.id = id;
+    public void setStoreId(int storeId) {
+        this.storeId = storeId;
     }
 
     public void setName(String name) {

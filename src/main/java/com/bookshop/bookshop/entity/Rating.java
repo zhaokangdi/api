@@ -16,7 +16,7 @@ public class Rating {
     int id;
 
     @Column(name = "book_id")
-    String bookId;
+    int bookId;
 
     @Column(name = "user_id")
     String userId;
@@ -24,11 +24,11 @@ public class Rating {
     @Column(name = "score")
     String score;
 
-    public String getId() {
+    public int getId() {
         return id;
     }
 
-    public String getBookId() {
+    public int getBookId() {
         return bookId;
     }
 
@@ -40,11 +40,11 @@ public class Rating {
         return score;
     }
 
-    public void setId(String id) {
+    public void setId(int id) {
         this.id = id;
     }
 
-    public void setBookId(String bookId) {
+    public void setBookId(int bookId) {
         this.bookId = bookId;
     }
 
